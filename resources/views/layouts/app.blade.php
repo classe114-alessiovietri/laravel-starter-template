@@ -8,6 +8,10 @@
 
         {{-- Stili nell'head --}}
         <link rel="stylesheet" href="css/style.css">
+
+        {{-- <!-- Includiamo gli assets con la direttiva @vite --> --}}
+        @vite('resources/js/app.js')
+
         @yield('head-imports')
     </head>
     <body>
@@ -15,6 +19,14 @@
         @include('partials.header')
 
         <main>
+            <div>
+                <img class="gatto-img" src="{{ Vite::asset('resources/img/gatto.webp') }}" alt="Gatto">
+            </div>
+
+            <div class="gatto-bg">
+                QUESTO DIV AVRA' COME SFONDO IL GATTO
+            </div>
+
             @yield('main-content')
         </main>
 
