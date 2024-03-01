@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Controllers
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\Admin\BookController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,41 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $firstName = 'Gino';
-    $lastName = 'Paoli';
+// Route::METODO(PERCORSO CON CUI ARRIVARE ALLA PAGINA, FUNZIONE DI CALLBACK CHE MI CREA LA RISPOSTA DA DARE ALL UTENTE)
 
-    /*
-        compact: crea un array associativo le cui chiavi sono le stringhe
-                 che mettiamo tra le parentesi, mentre i valori di tali
-                 chiavi sono i valori delle variabili con i nomi corrispondenti
-                 alle stringhe inserite
+Route::get('/', [MainController::class, 'index'])->name('home');   // <--- Che vantaggi ho nominando le rotte?
 
-        compact('firstName', 'lastName')
-         |                                     |
-         V                                     V
+Route::get('/chi-siamo', [MainController::class, 'about'])->name('about');
 
-         [
-            'firstName' => $firstName,
-            'lastName' => $lastName,
-         ]
-    */
-
-    /*
-        dd: vuol dire dump and die, cioè fai il var_dump (più carino però)
-            e poi stoppa l'esecuzione
-    */
-    // dd(compact('firstName', 'lastName'));
-
-    return view('welcome', [
-        'firstName' => $firstName,
-        'lastName' => $lastName,
-    ]);
-    // return view('welcome', compact('firstName', 'lastName'));
-});
-
-Route::get('/chi-siamo', function () {
-    return view('subpages.about');
-});
-
-// Route::get(PERCORSO CON CUI ARRIVARE ALLA PAGINA, FUNZIONE DI CALLBACK CHE MI CREA LA RISPOSTA DA DARE ALL UTENTE)
+/*
+    Questa istruzione definisce 7 rotte (in quest'ordine - perché è importante l'ordine delle rotte?):
+    - GET       /books                  -> books.index
+    - POST      /books                  -> books.store
+    - GET       /books/create           -> books.create
+    - GET       /books/{book}           -> books.show
+    - PUT       /books/{book}           -> books.update
+    - DELETE    /books/{book}           -> books.destroy
+    - GET       /books/{book}/edit      -> books.edit
+*/
+Route::resource('books', BookController::class);
