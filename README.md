@@ -16,6 +16,9 @@
 6. Aprire un altro terminale ed eseguire il comando php artisan serve
 
 
+--------------------------------------------------------------------------------------------
+
+
 # Passi per creare un'architettura CRUD completa
 
 1. Inseriamo i parametri corretti nel file .env per connetterci al database di interesse
